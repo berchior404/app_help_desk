@@ -1,4 +1,5 @@
 <?php
+    session_start();
 
     $user_verified = false;
 
@@ -15,9 +16,11 @@
 
     if ($user_verified) {
         echo('Usuário autenticado');
+        $_SESSION['authenticated'] = 'YES';
     }
     else {
         header('Location: index.php?login=erro');
+        $_SESSION['authenticated'] = 'NO';
     }
 
     ?>
