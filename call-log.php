@@ -6,9 +6,8 @@
     $description = str_replace(';', '.', $_POST['description']);
 
     $document = fopen('call.log', 'a');
-    $string = $_SESSION['id'] . $title . ';' .  $category . ';' . $description . PHP_EOL;
+    $string = $_SESSION['id'] . ';' . $title . ';' .  $category . ';' . $description . PHP_EOL;
     fwrite($document, $string);
     fclose($document);
 
     header('Location: abrir_chamado.php');
-?>

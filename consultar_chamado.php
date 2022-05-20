@@ -7,7 +7,18 @@ $document = fopen('call.log', 'r');
 
 while (!feof($document)) {
   $data = fgets($document);
-  $call_list[] = $data;
+  $data_details = explode('#', $data);
+
+  if ($_SESSION['profile_id'] == 2) {
+
+    if ($_SESSION['id'] != $data_details[0]) {
+      continue;
+    } else {
+      $call_list[] = $data;
+    }
+  } else {
+    $call_list[] = $data;
+  }
 }
 
 fclose($document);
@@ -33,9 +44,9 @@ fclose($document);
 <body>
 
   <nav class="navbar navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">
-      <img src="logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
-      App Help Desk
+    <a class="navbar-brand" href="home.php">
+      <img src="images/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+      PH Help Desk
     </a>
     <ul class="navbar-nav">
       <li class="nav-item">
@@ -56,16 +67,10 @@ fclose($document);
           <div class="card-body">
 
             <!-- PHP dynamic list -->
-            <? foreach ($call_list as $call) { ?>
+            <?php foreach ($call_list as $call) { ?>
 
               <?php
               $data_call = explode(';', $call);
-
-              if ($_SESSION['profile_id']) {
-                if ($_SESSION['id'] != $data_call[0]) {
-                  continue;
-                }
-              }
 
               if (count($data_call) < 3) {
                 continue;
@@ -81,7 +86,7 @@ fclose($document);
                 </div>
               </div>
 
-            <? } ?>
+            <?php } ?>
 
           </div>
 

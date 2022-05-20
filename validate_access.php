@@ -1,6 +1,6 @@
 <?php
-  session_start();
+session_start();
 
-  if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] != 'YES') {
-    header('Location: index.php?unauthorized-access');
-  }
+if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] != 'YES') {
+  header('Location: index.php?unauthorized-access');
+}
